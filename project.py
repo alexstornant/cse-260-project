@@ -1,3 +1,16 @@
+'''
+Programming Project CSE 260
+Alex Stornant: storna10
+Stefan Lemke: lemkest1
+
+Run program, input a number
+It will print out "unsat" if unsatisfiable
+if it is satisfiable, it will print a list of Queens in the form Q_(row)_(column) = (1) or (2). If 1, then queen is in spot on board, if 2, queen is not in spot.
+
+If you want to see the board displayed with matplotlib, keep the import and code marked optional.
+You can take out the imports for numpy and matplotlib if you want.
+'''
+
 from z3 import *
 
 # Optional imports
@@ -17,7 +30,6 @@ Q_2 = And( [ And ( [ And( [Or( Not(Q[i][j] == 1), Not(Q[i][k] == 1)) for k in ra
 Q_3 = And( [ And ( [ And( [Or( Not(Q[i][j] == 1), Not(Q[k][j] == 1)) for k in range(i+1,n)] )  for i in range(n-1)]) for j in range(n)] )
 
 Q_4 = And( [ And ( [ And( [Or( Not(Q[i-1][j-1] == 1), Not(Q[i-k-1][k+j-1] == 1)) for k in range(1, min(i-1,n-j) + 1)] )  for j in range(1,n)]) for i in range(2,n+1)] )
-pp(Q_4)
 
 Q_5 = And( [ And ( [ And( [Or( Not(Q[i-1][j-1] == 1), Not(Q[i+k-1][k+j-1] == 1)) for k in range(1,min(n-i,n-j)+1)] )  for j in range(1,n)]) for i in range(1,n)] )
 
